@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 import pickle
+import numpy as np
 
 app = Flask(__name__)
 
@@ -59,7 +60,8 @@ def index():
         traverse(cpu_list, cpu)
         traverse(gpu_list, gpu)
 
-        pred = prediction(feature_list)
+        pred = prediction(feature_list)*219
+        pred = np.round(pred[0])
 
     return render_template('index.html', pred = pred)
 
